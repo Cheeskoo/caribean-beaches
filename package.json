@@ -1,0 +1,20 @@
+{
+  "name": "caribean-beaches",
+  "version": "1.0.0",
+  "description": "An api that sends images of caribean beaches",
+  "homepage": "https://github.com/Cheeskoo/caribean-beaches#readme",
+  "bugs": {
+    "url": "https://github.com/Cheeskoo/caribean-beaches/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cheeskoo/caribean-beaches.git"
+  },
+  "license": "ISC",
+  "author": "Franco Calderon",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
