@@ -3,7 +3,7 @@ const image = document.getElementById('image');
 
 async function fetchRandomImage(){
     try {
-        const response = await fetch('http://localhost:3000/api/image');
+        const response = await fetch('http://localhost:5500/api/image');
 
         if (!response.ok){ 
             throw new Error('Error al cargar la imagen');

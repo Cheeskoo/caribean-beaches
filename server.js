@@ -2,17 +2,20 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import http from 'node:http';
 import { sendResponse, sendImageResponse } from './utils/sendResponse.js';
-import { serveStatic } from './utils/serveStatic.js'
+import { serveStatic } from './utils/serveStatic.js';
 
-const PORT = 3000;
+const PORT = 5500;
 
 const __dirname = import.meta.dirname;
-const imagesDir = path.join (__dirname, 'images');
+const imagesDir = path.join(__dirname, 'images');
 
 const server = http.createServer(async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+
     const requestUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
 
-    if (req.method === 'GET' && requestUrl.pathname === '/api/images') {
+    if (req.method === 'GET' && requestUrl.pathname === '/api/image') {
         try {
             const files = await fs.readdir(imagesDir);
             const images = files.filter((file) =>
@@ -44,11 +47,12 @@ const server = http.createServer(async (req, res) => {
         }
 
         return;
-    }else{
-        serveStatic(res, __dirname)
-    }
+    } else{
+        serveStatic(res, __dirname, requestUrl.pathname);
 
-    sendResponse(res, 404, 'application/json', { error: 'Endpoint no encontrado' });
+    }
+    
+
 });
 
 server.listen(PORT, () => {
